@@ -5,7 +5,7 @@
 Adafruit_MCP23X17 mcp;
 bool noMCP = false; // Declare the variable "noMCP" and initialize it to false
 
-const int ledPins[] = {A0, A1, A2, A3}; // Array to hold LED pin numbers
+const int ledPins[] = {A3, A2, A1, A0}; // Array to hold LED pin numbers
 const int numLeds = sizeof(ledPins) / sizeof(ledPins[0]);
 
 //  the setup function runs once when you press reset or power the board
@@ -41,19 +41,31 @@ void loop()
         digitalWrite(13, HIGH); // turn the LED on (HIGH is the voltage level)
         for (int i = 0; i < numLeds; i++) {
           digitalWrite(ledPins[i], HIGH);
-          delay(500);
+          delay(100);
         }
 
-        delay(1000); // wait for a second
+        // delay(200); // wait for a second
 
         digitalWrite(13, LOW); // turn the LED off by making the voltage LOW
 
-        for (int i = 0; i < numLeds; i++) {
+        for (int i = 0; i < numLeds - 1; i++) {
           digitalWrite(ledPins[i], LOW);
-          delay(500);
+          delay(100);
+        }
+        
+        delay(50); // wait for a second
+
+        for (int i = numLeds; i > -1; i--) {
+          digitalWrite(ledPins[i], HIGH);
+          delay(100);
         }
 
-        delay(1000); // wait for a second
+        for (int i = numLeds; i > 0; i--) {
+          digitalWrite(ledPins[i], LOW);
+          delay(60);
+        }
+
+        delay(200); // wait for a second
     }
     else
     {
